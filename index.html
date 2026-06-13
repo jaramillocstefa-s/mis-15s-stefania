@@ -2,7 +2,8 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=0.75, minimum-scale=0.75, maximum-scale=1.0, user-scalable=yes">
+  <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- El meta viewport se ajustará dinámicamente en móviles para forzar escala 0.75 -->
   <title>Stefania Jaramillo Carvajal | 15 años · Edición Encantada</title>
   <!-- Google Fonts premium -->
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700;800;900&family=Satisfy&family=Quicksand:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -704,6 +705,20 @@
 
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
+    // ========== SOLUCIÓN PARA FORZAR ESCALA 75% EN MÓVILES ==========
+    (function() {
+      // Detecta si es un dispositivo móvil (ancho <= 768px)
+      if (window.innerWidth <= 768) {
+        // Selecciona el meta viewport y fuerza la escala 0.75
+        var viewportMeta = document.getElementById('viewport');
+        if (viewportMeta) {
+          viewportMeta.setAttribute('content', 'width=device-width, initial-scale=0.75, minimum-scale=0.75, maximum-scale=1.0, user-scalable=yes');
+        }
+        // También se puede aplicar un ajuste adicional por si el navegador ignora el meta
+        // pero con esta solución es suficiente.
+      }
+    })();
+
     AOS.init({ duration: 900, once: true, offset: 50 });
 
     const landing = document.getElementById('landing-screen');
@@ -759,7 +774,6 @@
           lamp.style.height = size + 'px';
           lamp.style.left = Math.random() * 100 + '%';
           lamp.style.top = Math.random() * 100 + '%';
-          // Make lanterns move faster: durations 2s–5s and shorter random delays
           lamp.style.animationDuration = 2 + Math.random() * 3 + 's';
           lamp.style.animationDelay = Math.random() * 2 + 's';
           lamp.addEventListener('animationend', () => {
