@@ -2,8 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-  <!-- Ya no forzamos zoom al 75% que causaba recortes, usamos diseño responsivo puro -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
   <title>Stefania Jaramillo Carvajal | 15 años · Edición Encantada</title>
   <!-- Google Fonts premium -->
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700;800;900&family=Satisfy&family=Quicksand:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -12,7 +11,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
-    /* ----- RESET Y ESTILOS GLOBALES PREMIUM ----- */
+    /* ----- RESET Y ESTILOS GLOBALES PREMIUM (todos tus estilos originales) ----- */
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
@@ -67,8 +66,8 @@
 
     .sobre-animado {
       position: relative;
-      width: min(280px, 80vw);
-      height: 200px;
+      width: min(360px, 90vw);
+      height: 240px;
       background: url('sobre.png') center/cover no-repeat;
       background-size: cover;
       cursor: pointer;
@@ -76,7 +75,6 @@
       perspective: 800px;
       transform: scale(1);
       transition: transform 2s ease;
-      margin: 0 auto;
     }
     .sobre-animado::after {
       content: '';
@@ -88,7 +86,7 @@
       pointer-events: none;
     }
     .sobre-animado.abierto::after { opacity: 1; }
-    .sobre-animado.abierto { transform: scale(1.2); }
+    .sobre-animado.abierto { transform: scale(1.35); }
     .sobre-animado .flap {
       position: absolute;
       width: 100%;
@@ -172,8 +170,8 @@
       min-width: 72px;
       box-shadow: 0 10px 16px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,200,0.2);
     }
-    .countdown-piece span:first-child { font-size: 2rem; line-height: 1; }
-    .countdown-piece span:last-child { font-size: 0.7rem; letter-spacing: 0.08em; }
+    .countdown-piece span:first-child { font-size: 2.5rem; line-height: 1; }
+    .countdown-piece span:last-child { font-size: 0.75rem; letter-spacing: 0.08em; }
 
     .floral-divider {
       background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 20"><path fill="%23d4a843" d="M70,10 Q80,2 90,10 T110,10 M30,10 Q40,2 50,10 T70,10 M130,10 Q140,2 150,10 T170,10" stroke="%23b47c2e" fill="none" stroke-width="1.5"/><circle cx="100" cy="10" r="3" fill="%23d4a843"/></svg>');
@@ -222,8 +220,7 @@
       width: 100%;
       max-width: 900px;
       margin: 0 auto;
-      height: auto;
-      aspect-ratio: 3/4;
+      height: 650px; /* Altura fija para mantener la proporción en escritorio */
       padding: 5px;
     }
 
@@ -249,7 +246,7 @@
 
     /* Foto Superior Derecha (Alargada, Superpuesta) */
     .collage-derecha-arriba {
-      left: 55%;
+      left: 55%; /* Se monta sobre la foto izquierda */
       top: 2%;
       width: 44%;
       height: 48%;
@@ -259,7 +256,7 @@
 
     /* Foto Inferior Derecha (Alargada, Superpuesta) */
     .collage-derecha-abajo {
-      left: 55%;
+      left: 55%; /* Se monta sobre la foto izquierda */
       bottom: 2%;
       width: 44%;
       height: 48%;
@@ -267,10 +264,11 @@
       transform: rotate(-1deg);
     }
 
-    /* --- RESPONSIVE: MÓVIL --- */
+    /* --- RESPONSIVE: MÓVIL (se mantiene pero con la escala forzada estos ajustes son menores) --- */
     @media (max-width: 640px) {
       .collage-superpuesto {
-        aspect-ratio: auto;
+        height: auto;
+        padding: 0;
         display: flex;
         flex-direction: column;
         gap: 16px;
@@ -291,48 +289,17 @@
         max-width: 60vw;
       }
       .music-orb {
-        width: 48px;
-        height: 48px;
-        bottom: 15px;
-        right: 15px;
-      }
-      .linea-nombre {
-        font-size: clamp(2.8rem, 10vw, 4rem);
-        padding: 0 15px;
-      }
-      .cta-text {
-        white-space: normal;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
-        flex-wrap: wrap;
-        padding: 0 20px;
-      }
-      .rotating-star {
-        width: 2.5em;
-        height: 2.5em;
-        margin: 0 5px;
-      }
-      .footer-phrase {
-        font-size: 1rem;
-        flex-wrap: wrap;
-        gap: 5px;
-      }
-      .footer-star {
-        width: 2.5em;
-        height: 2.5em;
-        margin: 0 5px;
-      }
-      .countdown-piece span:first-child {
-        font-size: 1.8rem;
+        width: 56px;
+        height: 56px;
+        bottom: 18px;
+        right: 18px;
       }
     }
 
     .tiara-wrap {
       position: relative;
-      width: 200px;
-      max-width: 50vw;
+      width: 240px;
+      max-width: 48vw;
       margin: 0 auto;
       pointer-events: auto;
     }
@@ -343,17 +310,12 @@
       filter: saturate(1.03) contrast(1.03);
       transition: transform 0.28s ease, filter 0.28s ease;
     }
-
-    .cta-text { 
-      white-space: normal; 
-      display: inline-flex; 
-      align-items: center; 
-      justify-content: center;
-      gap: 15px;
-      opacity: 1; 
-      transition: opacity 0.3s ease;
-      margin-top: 20px;
+    .tiara-wrap:hover .tiara-img {
+      transform: translateY(-2px) scale(1.02);
+      filter: saturate(1.08) contrast(1.04) brightness(1.02);
     }
+
+    .cta-text { white-space: nowrap; display: inline-block; opacity: 1; transition: opacity 0.3s ease; }
     .cta-gradient {
       background: linear-gradient(90deg, #ffffff 0%, #ff79c6 100%);
       -webkit-background-clip: text;
@@ -361,50 +323,93 @@
       color: transparent;
       font-weight: 700;
       text-shadow: 0 2px 12px rgba(255,120,180,0.08);
-      font-size: 1.2rem;
     }
     .rotating-star {
       display: inline-block;
-      width: 2.8em;
-      height: 2.8em;
+      width: 3.6em;
+      height: 3.6em;
       object-fit: contain;
       vertical-align: middle;
       animation: pulseStar 1.6s ease-in-out infinite;
+      margin: 0 14px;
       filter: sepia(1) saturate(4) hue-rotate(10deg) brightness(1.05);
     }
     @media (min-width: 768px) {
       .rotating-star {
-        width: 4em;
-        height: 4em;
+        width: 5.8em;
+        height: 5.8em;
+        margin: 0 18px;
       }
-      .cta-gradient {
-        font-size: 1.5rem;
+    }
+    /* Footer stars: enlarged to match larger footer text and with a softer yellow tint */
+    .footer-star {
+      width: 4.4em;
+      height: 4.4em;
+      margin: 0 16px;
+      filter: sepia(1) saturate(5) hue-rotate(10deg) brightness(1.1) contrast(1.04);
+    }
+    @media (min-width: 768px) {
+      .footer-star {
+        width: 6.6em;
+        height: 6.6em;
+        margin: 0 20px;
       }
+    }
+    /* Ensure footer phrase and stars stay on one line and scale responsively */
+    .footer-phrase {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.8rem;
+      white-space: nowrap;
+      font-size: clamp(1rem, 2.6vw, 1.8rem);
+      line-height: 1;
+    }
+    @media (min-width: 768px) {
+      .footer-phrase { font-size: clamp(1.2rem, 1.6vw, 2.4rem); }
+    }
+    .cora-pulse { display: inline-block; animation: coraPulse 1.6s ease-in-out infinite; }
+    .pascal-walk { display: inline-block; animation: pascalWalk 2s ease-in-out infinite; }
+    .flore-sparkle {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        radial-gradient(circle at 25% 20%, rgba(255,255,255,0.95) 0, transparent 18%),
+        radial-gradient(circle at 70% 35%, rgba(255,255,255,0.8) 0, transparent 16%),
+        radial-gradient(circle at 55% 70%, rgba(255,255,255,0.7) 0, transparent 12%);
+      opacity: 0;
+      mix-blend-mode: screen;
+      animation: floreSparkle 2.4s ease-in-out infinite;
+    }
+    @keyframes coraPulse { 0% { transform: scale(1); } 50% { transform: scale(1.12); } 100% { transform: scale(1); } }
+    @keyframes floreSparkle { 0% { opacity: 0; transform: translateY(0); } 20% { opacity: 0.8; transform: translateY(-2px); } 50% { opacity: 0.4; transform: translateY(2px); } 80% { opacity: 0.6; transform: translateY(-1px); } 100% { opacity: 0; transform: translateY(0); } }
+    @keyframes pascalWalk { 0% { transform: translateX(0) translateY(0) scale(1); } 30% { transform: translateX(1px) translateY(-0.5px) scale(1.01); } 60% { transform: translateX(0) translateY(0) scale(1); } 100% { transform: translateX(0) translateY(0) scale(1); } }
+    .rotating-sun { display: inline-block; animation: spinSlow 12s linear infinite; }
+    @keyframes pulseStar {
+      0% { transform: rotate(0deg) scale(1); opacity: 0.9; filter: drop-shadow(0 0 0 rgba(255,215,100,0)) brightness(1); }
+      40% { transform: rotate(10deg) scale(1.15); opacity: 1; filter: drop-shadow(0 6px 18px rgba(255,215,120,0.24)) brightness(1.12); }
+      60% { transform: rotate(-8deg) scale(1.08); opacity: 1; filter: drop-shadow(0 8px 22px rgba(255,230,150,0.26)) brightness(1.10); }
+      100% { transform: rotate(0deg) scale(1); opacity: 0.9; filter: drop-shadow(0 0 0 rgba(255,215,100,0)) brightness(1); }
     }
 
-    /* Ajustes para evitar recortes en el landing screen */
-    #landing-screen {
-      min-height: 100vh;
-      padding: 20px 16px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-    }
-    .landing-body {
-      width: 100%;
-    }
+    #landing-screen { transform-origin: center center; }
+    #landing-screen.landing-open { animation: landingDive 1s ease-in forwards; }
+    @keyframes landingDive { 0% { transform: translateY(0) scale(1); opacity: 1; } 60% { transform: translateY(-8vh) scale(1.6); opacity: 0.85; } 100% { transform: translateY(-32vh) scale(3); opacity: 0; } }
+    #invitation-full { opacity: 0; transform: scale(1.03); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+    #invitation-full.visible { opacity: 1; transform: scale(1); }
     .linea-nombre {
       font-family: 'Great Vibes', cursive;
-      font-size: clamp(3rem, 8vw, 5rem);
-      line-height: 1.2;
+      font-size: clamp(3.2rem, 5vw, 5.5rem);
+      line-height: 0.95;
       letter-spacing: 0.01em;
       color: #d4a843;
       text-shadow: 0 2px 7px rgba(0,0,0,0.55), 0 0 10px rgba(212,168,67,0.75);
       margin: 0;
-      padding: 0 10px;
-      word-break: break-word;
+      padding-bottom: 6px;
+      white-space: normal;
+      overflow-wrap: break-word;
     }
     .gold-gradient-text {
       background: linear-gradient(90deg, #f3e6c1 0%, #d9c17a 35%, #f7e9b4 65%, #d0b96c 100%);
@@ -417,10 +422,10 @@
     .salmon-rose-purple-text { background: linear-gradient(135deg, #ffb3a7, #f2a0c4, #dfb541); -webkit-background-clip: text; background-clip: text; color: transparent; text-shadow: 0 1px 3px rgba(0,0,0,0.18); }
     .music-orb {
       position: fixed;
-      bottom: 20px;
-      right: 20px;
-      width: 54px;
-      height: 54px;
+      bottom: 30px;
+      right: 30px;
+      width: 64px;
+      height: 64px;
       background: radial-gradient(circle, #fff5e6, #e9cf9e);
       border-radius: 50%;
       border: 2px solid #d4a843;
@@ -430,240 +435,271 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      font-size: 30px;
+      color: #4a1a6e;
+      transition: 0.2s;
     }
-    .music-orb img { width: 65%; height: auto; display: block; border-radius: 50%; }
+    .music-orb img { width: 60%; height: auto; display: block; border-radius: 50%; }
     .music-orb.playing { animation: spinMusic 4s linear infinite; }
     @keyframes spinMusic { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
     img.error-hidden { display: none !important; }
     @keyframes spinSlow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
     .sun-spin { animation: spinSlow 20s linear infinite; display: inline-block; }
-    .cora-pulse { display: inline-block; animation: coraPulse 1.6s ease-in-out infinite; }
-    .pascal-walk { display: inline-block; animation: pascalWalk 2s ease-in-out infinite; }
-    @keyframes coraPulse { 0% { transform: scale(1); } 50% { transform: scale(1.12); } 100% { transform: scale(1); } }
-    @keyframes pascalWalk { 0% { transform: translateX(0) translateY(0) scale(1); } 30% { transform: translateX(1px) translateY(-0.5px) scale(1.01); } 60% { transform: translateX(0) translateY(0) scale(1); } 100% { transform: translateX(0) translateY(0) scale(1); } }
-    .flore-sparkle { content: ''; position: absolute; inset: 0; pointer-events: none; background-image: radial-gradient(circle at 25% 20%, rgba(255,255,255,0.95) 0, transparent 18%), radial-gradient(circle at 70% 35%, rgba(255,255,255,0.8) 0, transparent 16%), radial-gradient(circle at 55% 70%, rgba(255,255,255,0.7) 0, transparent 12%); opacity: 0; mix-blend-mode: screen; animation: floreSparkle 2.4s ease-in-out infinite; }
-    @keyframes floreSparkle { 0% { opacity: 0; transform: translateY(0); } 20% { opacity: 0.8; transform: translateY(-2px); } 50% { opacity: 0.4; transform: translateY(2px); } 80% { opacity: 0.6; transform: translateY(-1px); } 100% { opacity: 0; transform: translateY(0); } }
-    @keyframes pulseStar {
-      0% { transform: rotate(0deg) scale(1); opacity: 0.9; filter: drop-shadow(0 0 0 rgba(255,215,100,0)) brightness(1); }
-      40% { transform: rotate(10deg) scale(1.15); opacity: 1; filter: drop-shadow(0 6px 18px rgba(255,215,120,0.24)) brightness(1.12); }
-      60% { transform: rotate(-8deg) scale(1.08); opacity: 1; filter: drop-shadow(0 8px 22px rgba(255,230,150,0.26)) brightness(1.10); }
-      100% { transform: rotate(0deg) scale(1); opacity: 0.9; filter: drop-shadow(0 0 0 rgba(255,215,100,0)) brightness(1); }
+    
+    /* Clase para el wrapper que aplicará la escala en móviles */
+    .scale-wrapper {
+      transform-origin: top left;
+      width: 100%;
+      transition: transform 0.1s ease;
     }
-    #landing-screen.landing-open { animation: landingDive 1s ease-in forwards; }
-    @keyframes landingDive { 0% { transform: translateY(0) scale(1); opacity: 1; } 60% { transform: translateY(-8vh) scale(1.6); opacity: 0.85; } 100% { transform: translateY(-32vh) scale(3); opacity: 0; } }
-    #invitation-full { opacity: 0; transform: scale(1.03); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
-    #invitation-full.visible { opacity: 1; transform: scale(1); }
+    /* Escritorio: sin escala */
+    @media (min-width: 769px) {
+      .scale-wrapper {
+        transform: none !important;
+        width: 100% !important;
+      }
+    }
   </style>
 </head>
 <body>
-
-  <!-- PANTALLA DE BIENVENIDA CON SOBRE DE LUJO -->
-  <div id="landing-screen" class="min-h-screen flex flex-col items-center justify-center relative bg-morado-profundo px-4 text-center">
-    <div class="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-[#d4a84320] to-transparent"></div>
-    <svg class="absolute top-5 left-0 w-full h-16" preserveAspectRatio="none" viewBox="0 0 1200 120">
-      <path fill="url(#wisteriaGrad)" d="M0,64L80,69C160,75,320,85,480,80C640,75,800,53,960,48C1120,43,1280,53,1360,58L1440,64L1440,0L1360,0C1280,0,1120,0,960,0C800,0,640,0,480,0C320,0,160,0,80,0L0,0Z" opacity="0.7"/>
-      <defs><linearGradient id="wisteriaGrad" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#9b6b9e"/><stop offset="100%" stop-color="#d4a843"/></linearGradient></defs>
-    </svg>
-    <div data-aos="fade-down" data-aos-duration="1000" class="mb-4">
-      <div class="tiara-wrap" aria-hidden="true">
-        <img src="TIARA.png" alt="Tiara" class="tiara-img" />
-      </div>
-    </div>
-    <div class="landing-body w-full max-w-5xl">
-      <div class="landing-card" data-aos="fade-up">
-        <div class="texto-central">
-          <div class="linea-nombre">Stefania Jaramillo Carvajal</div>
+  <!-- Wrapper que aplicará la escala del 75% en móviles -->
+  <div id="scaleWrapper" class="scale-wrapper">
+    <!-- PANTALLA DE BIENVENIDA CON SOBRE DE LUJO -->
+    <div id="landing-screen" class="min-h-screen flex flex-col items-center justify-center relative bg-morado-profundo px-16 text-center">
+      <div class="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-[#d4a84320] to-transparent"></div>
+      <svg class="absolute top-5 left-0 w-full h-16" preserveAspectRatio="none" viewBox="0 0 1200 120">
+        <path fill="url(#wisteriaGrad)" d="M0,64L80,69C160,75,320,85,480,80C640,75,800,53,960,48C1120,43,1280,53,1360,58L1440,64L1440,0L1360,0C1280,0,1120,0,960,0C800,0,640,0,480,0C320,0,160,0,80,0L0,0Z" opacity="0.7"/>
+        <defs><linearGradient id="wisteriaGrad" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#9b6b9e"/><stop offset="100%" stop-color="#d4a843"/></linearGradient></defs>
+      </svg>
+      <div data-aos="fade-down" data-aos-duration="1000" class="mb-4">
+        <div class="tiara-wrap" aria-hidden="true">
+          <img src="TIARA.png" alt="Tiara" class="tiara-img" />
         </div>
       </div>
-    </div>
-    <div class="mt-8" data-aos="zoom-in" data-aos-delay="200">
-      <div class="sobre-animado" id="envelopeTrigger">
-        <div class="flap flap-top"></div>
-        <div class="flap flap-bottom"></div>
-        <div class="flap flap-left"></div>
-        <div class="flap flap-right"></div>
+      <div class="landing-body w-full max-w-5xl">
+        <div class="landing-card" data-aos="fade-up">
+          <div class="texto-central">
+            <div class="linea-nombre">Stefania Jaramillo Carvajal</div>
+          </div>
+        </div>
       </div>
+      <div class="mt-12" data-aos="zoom-in" data-aos-delay="200">
+        <div class="sobre-animado" id="envelopeTrigger">
+          <div class="flap flap-top"></div>
+          <div class="flap flap-bottom"></div>
+          <div class="flap flap-left"></div>
+          <div class="flap flap-right"></div>
+        </div>
+      </div>
+      <p class="text-center font-medium mt-5 text-2xl md:text-4xl italic cta-text" data-aos="fade-up">
+        <img src="star.png" alt="" class="rotating-star" aria-hidden="true" />
+        <span class="cta-gradient">Toca el sobre para descubrir la magia</span>
+        <img src="star.png" alt="" class="rotating-star" aria-hidden="true" />
+      </p>
     </div>
-    <p class="text-center font-medium mt-5 text-xl md:text-2xl italic cta-text" data-aos="fade-up">
-      <img src="star.png" alt="" class="rotating-star" aria-hidden="true" />
-      <span class="cta-gradient">Toca el sobre para descubrir la magia</span>
-      <img src="star.png" alt="" class="rotating-star" aria-hidden="true" />
-    </p>
-  </div>
 
-  <!-- CONTENIDO PRINCIPAL DE LA INVITACIÓN (igual que antes, sin cambios) -->
-  <div id="invitation-full" style="display: none;">
-    
-    <!-- SECCIÓN RAPUNZEL CON CITA ÍNTIMA -->
-    <section class="bg-morado-profundo py-36 md:py-48 px-6 relative overflow-hidden">
-      <div id="lanterns-area" class="absolute inset-0 w-full h-full"></div>
-      <div class="relative z-10 max-w-6xl mx-auto">
-        <div class="flex flex-wrap items-center justify-center gap-8">
-          <div class="flex-1 min-w-[260px] text-center" data-aos="fade-up">
-            <div class="flex justify-center mb-6">
-              <img src="sol.png" alt="Sol decorativo" class="w-20 h-auto mx-auto rotating-sun" />
+    <!-- CONTENIDO PRINCIPAL DE LA INVITACIÓN -->
+    <div id="invitation-full" style="display: none;">
+      
+      <!-- SECCIÓN RAPUNZEL CON CITA ÍNTIMA -->
+      <section class="bg-morado-profundo py-36 md:py-48 px-6 relative overflow-hidden">
+        <div id="lanterns-area" class="absolute inset-0 w-full h-full"></div>
+        <div class="relative z-10 max-w-6xl mx-auto">
+          <div class="flex flex-wrap items-center justify-center gap-8">
+            <div class="flex-1 min-w-[260px] text-center" data-aos="fade-up">
+              <div class="flex justify-center mb-6">
+                <img src="sol.png" alt="Sol decorativo" class="w-20 h-auto mx-auto rotating-sun" />
+              </div>
+              <p class="text-[#fef5e7] text-2xl md:text-4xl font-['Playfair_Display'] italic leading-relaxed mb-20 md:mb-28">
+                “Así como Rapunzel dejó su torre para descubrir el mundo, yo dejo atrás mi niñez para iluminar mi camino con la magia de mis 15 años. Con cada paso, cada risa y cada sueño, me acerco más a la mujer que estoy destinada a ser. En esta noche tan especial, quiero compartir mi alegría y mis sueños contigo, porque tú eres parte de mi historia y de mi magia.”
+              </p>
+              <div class="mt-6 flex justify-center">
+                <img src="XV.png" alt="XV" class="mx-auto max-w-sm w-full md:max-w-md" />
+              </div>
             </div>
-            <p class="text-[#fef5e7] text-2xl md:text-4xl font-['Playfair_Display'] italic leading-relaxed mb-20 md:mb-28">
-              “Así como Rapunzel dejó su torre para descubrir el mundo, yo dejo atrás mi niñez para iluminar mi camino con la magia de mis 15 años. Con cada paso, cada risa y cada sueño, me acerco más a la mujer que estoy destinada a ser. En esta noche tan especial, quiero compartir mi alegría y mis sueños contigo, porque tú eres parte de mi historia y de mi magia.”
-            </p>
-            <div class="mt-6 flex justify-center">
-              <img src="XV.png" alt="XV" class="mx-auto max-w-sm w-full md:max-w-md" />
+            
+            <!-- FOTO PRINCIPAL CORREGIDA CON aspect-[9/16] -->
+            <div class="w-full max-w-[360px] md:w-80 h-auto aspect-[9/16] photo-frame main-photo-card self-start mt-8" data-aos="fade-left">
+              <div class="relative overflow-hidden h-full">
+                <img src="foto.jpg" alt="Tu momento especial" class="absolute inset-0 w-full h-full object-cover main-photo-img" />
+              </div>
             </div>
           </div>
           
-          <!-- FOTO PRINCIPAL -->
-          <div class="w-full max-w-[360px] md:w-80 h-auto aspect-[9/16] photo-frame main-photo-card self-start mt-8" data-aos="fade-left">
+          <!-- === NUEVO COLLAGE SUPERPUESTO === -->
+          <div class="max-w-6xl mx-auto mt-24 px-4">
+            <div class="collage-superpuesto">
+              
+              <!-- Foto Izquierda (La más grande) -->
+              <div class="collage-item collage-izquierda photo-frame">
+                <img src="noche-de-luz.jpg" alt="Foto Estilo 2" />
+              </div>
+
+              <!-- Foto Superior Derecha (Superpuesta) -->
+              <div class="collage-item collage-derecha-arriba photo-frame">
+                <img src="foto-5.jpg" alt="Foto Estilo 1" />
+              </div>
+
+              <!-- Foto Inferior Derecha (Superpuesta) -->
+              <div class="collage-item collage-derecha-abajo photo-frame">
+                <img src="foto-6.jpg" alt="Foto Estilo 3" />
+              </div>
+
+            </div>
+          </div>
+          <!-- === FIN NUEVO COLLAGE === -->
+
+        </div>
+      </section>
+
+      <!-- SECCIÓN PADRES Y CITA FORMAL CON MARCOS LATERALES CORREGIDOS -->
+      <section class="py-24 px-6 bg-morado-profundo">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-8">
+          <div class="w-full sm:w-56 photo-frame flex-shrink-0 aspect-square" data-aos="fade-right">
             <div class="relative overflow-hidden h-full">
-              <img src="foto.jpg" alt="Tu momento especial" class="absolute inset-0 w-full h-full object-cover main-photo-img" />
+              <img src="IM1.jpg" alt="Familia" class="absolute inset-0 w-full h-full object-cover" />
+            </div>
+          </div>
+          <div class="flex-1 text-center" data-aos="fade-up">
+            <div class="floral-divider mb-8"></div>
+            <p class="text-[#f8f5f9] text-xl md:text-2xl tracking-wide">Con la bendición de Dios y el amor de mis Padres</p>
+            <h2 class="font-['Playfair_Display'] text-4xl md:text-6xl leading-tight md:leading-snug font-bold gold-gradient-text my-4">
+              <span class="block whitespace-normal sm:whitespace-nowrap break-words">LAURA FLOR CARVAJAL</span>
+              <span class="block whitespace-normal sm:whitespace-nowrap break-words">JUAN JOSÉ JARAMILLO</span>
+            </h2>
+            <div class="w-32 h-[2px] bg-gradient-to-r from-transparent via-[#d4a843] to-transparent mx-auto my-6"></div>
+            <p class="text-[#f4eff5] text-3xl md:text-4xl font-light italic leading-relaxed">
+              Te invito a acompañarme en esta noche de magia, donde las luces brillarán tanto como mis sueños.
+            </p>
+            <div class="floral-divider mt-8"></div>
+          </div>
+          <div class="w-full sm:w-56 photo-frame flex-shrink-0 aspect-square" data-aos="fade-left">
+            <div class="relative overflow-hidden h-full">
+              <img src="IM2.jpg" alt="Bendición" class="absolute inset-0 w-full h-full object-cover" />
             </div>
           </div>
         </div>
-        
-        <!-- COLLAGE SUPERPUESTO -->
-        <div class="max-w-6xl mx-auto mt-24 px-4">
-          <div class="collage-superpuesto">
-            <div class="collage-item collage-izquierda photo-frame">
-              <img src="noche-de-luz.jpg" alt="Foto Estilo 2" />
+      </section>
+
+      <!-- SECCIÓN FECHA Y TARJETAS DE EVENTO -->
+      <section class="py-20 px-6 bg-morado-profundo">
+        <div class="text-center" data-aos="fade-up">
+          <p class="text-4xl md:text-5xl font-['Playfair_Display'] font-black gold-text">SÁBADO 27 DE JUNIO</p>
+          <div class="flex justify-center my-6"><i class="fas fa-sun text-4xl text-[#d4a843] sun-spin"></i></div>
+        </div>
+        <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 mt-10">
+          <div class="glass-card p-8 text-center" data-aos="fade-right">
+            <i class="fas fa-church text-5xl text-[#b47c2e] mb-3"></i>
+            <h3 class="text-3xl serif-classic font-bold text-[#4a1a6e]">EUCARISTÍA</h3>
+            <p class="text-4xl md:text-5xl font-extrabold text-[#8c5e10]"><span class="whitespace-nowrap inline-flex items-baseline gap-2">11:00 <span class="ampm text-base md:text-lg align-top">AM</span></span></p>
+            <p class="text-[#2d1a41] serif-classic">Parroquia De la Trinidad, Pereira Risaralda</p>
+            <a href="https://maps.google.com/?q=Parroquia+De+la+Trinidad+Pereira+Risaralda" target="_blank" class="btn-gold inline-block px-8 py-2 rounded-full mt-6 text-sm"><i class="fas fa-map-marker-alt mr-2"></i> VER UBICACIÓN</a>
+            <div class="mt-6 mx-auto w-28 h-28 md:w-32 md:h-32 flore-container">
+              <img src="FLORE.png" alt="Eucaristía" class="w-full h-full object-contain flore-image" />
+              <span class="flore-sparkle"></span>
             </div>
-            <div class="collage-item collage-derecha-arriba photo-frame">
-              <img src="foto-5.jpg" alt="Foto Estilo 1" />
+          </div>
+          <div class="glass-card p-8 text-center" data-aos="fade-left">
+            <i class="fas fa-glass-cheers text-5xl text-[#d4a843] mb-3"></i>
+            <h3 class="text-3xl serif-classic font-bold text-[#4a1a6e]">RECEPCIÓN</h3>
+            <p class="text-4xl md:text-5xl font-extrabold text-[#8c5e10]"><span class="whitespace-nowrap inline-flex items-baseline gap-2">6:00 <span class="ampm text-base md:text-lg align-top">PM</span></span></p>
+            <p class="text-[#2d1a41] serif-classic">VILLA DE LOS ANGELES</p>
+            <a href="https://maps.app.goo.gl/3Zc2oVb8as4raodr9" target="_blank" class="btn-gold inline-block px-8 py-2 rounded-full mt-6 text-sm"><i class="fas fa-map-marker-alt mr-2"></i> VER UBICACIÓN</a>
+            <div class="mt-6 mx-auto w-28 h-28 md:w-32 md:h-32">
+              <img src="PASCAL.png" alt="Recepción" class="w-full h-full object-contain pascal-walk" />
             </div>
-            <div class="collage-item collage-derecha-abajo photo-frame">
-              <img src="foto-6.jpg" alt="Foto Estilo 3" />
-            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- SECCIÓN PADRES -->
-    <section class="py-24 px-6 bg-morado-profundo">
-      <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-8">
-        <div class="w-full sm:w-56 photo-frame flex-shrink-0 aspect-square" data-aos="fade-right">
-          <div class="relative overflow-hidden h-full">
-            <img src="IM1.jpg" alt="Familia" class="absolute inset-0 w-full h-full object-cover" />
+      <!-- CUENTA REGRESIVA -->
+      <section class="py-24 px-4 bg-morado-profundo relative">
+        <div id="lanterns2" class="absolute inset-0"></div>
+        <div class="relative z-10 text-center">
+          <h2 class="text-5xl font-['Playfair_Display'] text-[#d4a843] mb-10">FALTAN:</h2>
+          <div class="flex flex-wrap justify-center gap-6" id="countdown">
+            <div class="countdown-piece"><span class="text-5xl font-bold text-[#fdf6e3]" id="days">00</span><br><span class="text-[#d4a843] text-sm uppercase tracking-wide">Días</span></div>
+            <div class="countdown-piece"><span class="text-5xl font-bold text-[#fdf6e3]" id="hours">00</span><br><span class="text-[#d4a843] text-sm uppercase tracking-wide">Horas</span></div>
+            <div class="countdown-piece"><span class="text-5xl font-bold text-[#fdf6e3]" id="minutes">00</span><br><span class="text-[#d4a843] text-sm uppercase tracking-wide">Minutos</span></div>
+            <div class="countdown-piece"><span class="text-5xl font-bold text-[#fdf6e3]" id="seconds">00</span><br><span class="text-[#d4a843] text-sm uppercase tracking-wide">Segundos</span></div>
           </div>
         </div>
-        <div class="flex-1 text-center" data-aos="fade-up">
-          <div class="floral-divider mb-8"></div>
-          <p class="text-[#f8f5f9] text-xl md:text-2xl tracking-wide">Con la bendición de Dios y el amor de mis Padres</p>
-          <h2 class="font-['Playfair_Display'] text-4xl md:text-6xl leading-tight md:leading-snug font-bold gold-gradient-text my-4">
-            <span class="block whitespace-normal sm:whitespace-nowrap break-words">LAURA FLOR CARVAJAL</span>
-            <span class="block whitespace-normal sm:whitespace-nowrap break-words">JUAN JOSÉ JARAMILLO</span>
-          </h2>
-          <div class="w-32 h-[2px] bg-gradient-to-r from-transparent via-[#d4a843] to-transparent mx-auto my-6"></div>
-          <p class="text-[#f4eff5] text-3xl md:text-4xl font-light italic leading-relaxed">
-            Te invito a acompañarme en esta noche de magia, donde las luces brillarán tanto como mis sueños.
-          </p>
-          <div class="floral-divider mt-8"></div>
-        </div>
-        <div class="w-full sm:w-56 photo-frame flex-shrink-0 aspect-square" data-aos="fade-left">
-          <div class="relative overflow-hidden h-full">
-            <img src="IM2.jpg" alt="Bendición" class="absolute inset-0 w-full h-full object-cover" />
+      </section>
+
+      <!-- VESTIMENTA + LLUVIA DE SOBRES -->
+      <section class="py-20 bg-morado-profundo px-6 text-center">
+        <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-12" data-aos="fade-up">
+          <div class="bg-white/40 p-8 rounded-3xl shadow-lg">
+            <img src="vestimenta.png" alt="Código de Vestimenta" class="mx-auto h-24 mb-4" />
+            <h3 class="text-3xl serif-classic font-bold mt-4">Código de Vestimenta</h3>
+            <p class="font-['Satisfy'] text-4xl text-[#d4a843] mt-2">✨ Se reservan los colores pasteles ✨</p>
+          </div>
+          <div class="bg-white/40 p-8 rounded-3xl shadow-lg">
+            <img src="sobres.png" alt="Lluvia de Sobres" class="mx-auto h-24 mb-4" />
+           
+            <p class="text-[#2d1a41] serif-classic">Tu presencia es el mejor regalo, sin embargo si deseas traer un obsequio puedes hacerlo a través de:</p>
+            <p class="font-['Satisfy'] text-4xl text-[#d4a843] mt-2">Lluvia de Sobres</p>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- SECCIÓN FECHA Y TARJETAS -->
-    <section class="py-20 px-6 bg-morado-profundo">
-      <div class="text-center" data-aos="fade-up">
-        <p class="text-4xl md:text-5xl font-['Playfair_Display'] font-black gold-text">SÁBADO 27 DE JUNIO</p>
-        <div class="flex justify-center my-6"><i class="fas fa-sun text-4xl text-[#d4a843] sun-spin"></i></div>
-      </div>
-      <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 mt-10">
-        <div class="glass-card p-8 text-center" data-aos="fade-right">
-          <i class="fas fa-church text-5xl text-[#b47c2e] mb-3"></i>
-          <h3 class="text-3xl serif-classic font-bold text-[#4a1a6e]">EUCARISTÍA</h3>
-          <p class="text-4xl md:text-5xl font-extrabold text-[#8c5e10]"><span class="whitespace-nowrap inline-flex items-baseline gap-2">11:00 <span class="ampm text-base md:text-lg align-top">AM</span></span></p>
-          <p class="text-[#2d1a41] serif-classic">Parroquia De la Trinidad, Pereira Risaralda</p>
-          <a href="https://maps.google.com/?q=Parroquia+De+la+Trinidad+Pereira+Risaralda" target="_blank" class="btn-gold inline-block px-8 py-2 rounded-full mt-6 text-sm"><i class="fas fa-map-marker-alt mr-2"></i> VER UBICACIÓN</a>
-          <div class="mt-6 mx-auto w-28 h-28 md:w-32 md:h-32 flore-container">
-            <img src="FLORE.png" alt="Eucaristía" class="w-full h-full object-contain flore-image" />
-            <span class="flore-sparkle"></span>
+      <!-- RSVP CON BOTONES -->
+      <section class="py-20 px-6 bg-gradient-to-b from-[#f3e7d3] to-[#e6d5bc]">
+        <div class="max-w-2xl mx-auto text-center" data-aos="fade-up">
+          <img src="visto.png" alt="Visto" class="mx-auto w-20 h-20 mb-4" />
+          <p class="text-2xl serif-classic font-medium text-[#4a1a6e]">Para nosotros es muy importante que confirmes tu asistencia</p>
+          <div class="flex flex-col sm:flex-row gap-5 justify-center mt-10">
+            <a href="https://api.whatsapp.com/send?phone=573218547135&text=¡Hola!%20confirmo%20mi%20asistencia%20a%20tus%20quince%20años" target="_blank" class="btn-gold py-4 px-8 rounded-full text-lg font-bold shadow-xl"><i class="fab fa-whatsapp mr-2"></i> Confirmar a Stefania</a>
+            <a href="https://api.whatsapp.com/send?phone=573217314755&text=¡Hola!%20Confirmo%20mi%20asistencia%20a%20los%2015%20años%20de%20Stefania" target="_blank" class="btn-gold py-4 px-8 rounded-full text-lg font-bold shadow-xl"><i class="fab fa-whatsapp mr-2"></i> Confirmar a mamá de Stefania</a>
           </div>
         </div>
-        <div class="glass-card p-8 text-center" data-aos="fade-left">
-          <i class="fas fa-glass-cheers text-5xl text-[#d4a843] mb-3"></i>
-          <h3 class="text-3xl serif-classic font-bold text-[#4a1a6e]">RECEPCIÓN</h3>
-          <p class="text-4xl md:text-5xl font-extrabold text-[#8c5e10]"><span class="whitespace-nowrap inline-flex items-baseline gap-2">6:00 <span class="ampm text-base md:text-lg align-top">PM</span></span></p>
-          <p class="text-[#2d1a41] serif-classic">VILLA DE LOS ANGELES</p>
-          <a href="https://maps.app.goo.gl/3Zc2oVb8as4raodr9" target="_blank" class="btn-gold inline-block px-8 py-2 rounded-full mt-6 text-sm"><i class="fas fa-map-marker-alt mr-2"></i> VER UBICACIÓN</a>
-          <div class="mt-6 mx-auto w-28 h-28 md:w-32 md:h-32">
-            <img src="PASCAL.png" alt="Recepción" class="w-full h-full object-contain pascal-walk" />
-          </div>
-        </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- CUENTA REGRESIVA -->
-    <section class="py-24 px-4 bg-morado-profundo relative">
-      <div id="lanterns2" class="absolute inset-0"></div>
-      <div class="relative z-10 text-center">
-        <h2 class="text-5xl font-['Playfair_Display'] text-[#d4a843] mb-10">FALTAN:</h2>
-        <div class="flex flex-wrap justify-center gap-6" id="countdown">
-          <div class="countdown-piece"><span class="text-5xl font-bold text-[#fdf6e3]" id="days">00</span><br><span class="text-[#d4a843] text-sm uppercase tracking-wide">Días</span></div>
-          <div class="countdown-piece"><span class="text-5xl font-bold text-[#fdf6e3]" id="hours">00</span><br><span class="text-[#d4a843] text-sm uppercase tracking-wide">Horas</span></div>
-          <div class="countdown-piece"><span class="text-5xl font-bold text-[#fdf6e3]" id="minutes">00</span><br><span class="text-[#d4a843] text-sm uppercase tracking-wide">Minutos</span></div>
-          <div class="countdown-piece"><span class="text-5xl font-bold text-[#fdf6e3]" id="seconds">00</span><br><span class="text-[#d4a843] text-sm uppercase tracking-wide">Segundos</span></div>
+      <!-- FOOTER ROMÁNTICO -->
+      <footer class="bg-[#1a0829] py-16 text-center">
+        <img src="CORA.png" alt="Cora" class="mx-auto h-44 md:h-64 cora-pulse mb-4" />
+        <p class="text-[#e6cf9e] text-xl md:text-2xl">Stefania Jaramillo Carvajal</p>
+        <div class="flex justify-center gap-3 mt-6 text-[#d4a843] text-xl">
+          <i class="fas fa-feather-alt"></i> <i class="fas fa-crown"></i> <i class="fas fa-star"></i>
         </div>
-      </div>
-    </section>
+        <p class="salmon-rose-purple-text footer-phrase mt-8">
+          <img src="star.png" alt="" class="rotating-star footer-star" aria-hidden="true" />
+          <span class="align-middle">Una celebración llena de magia y encanto</span>
+          <img src="star.png" alt="" class="rotating-star footer-star" aria-hidden="true" />
+        </p>
+      </footer>
+    </div>
 
-    <!-- VESTIMENTA + LLUVIA DE SOBRES -->
-    <section class="py-20 bg-morado-profundo px-6 text-center">
-      <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-12" data-aos="fade-up">
-        <div class="bg-white/40 p-8 rounded-3xl shadow-lg">
-          <img src="vestimenta.png" alt="Código de Vestimenta" class="mx-auto h-24 mb-4" />
-          <h3 class="text-3xl serif-classic font-bold mt-4">Código de Vestimenta</h3>
-          <p class="font-['Satisfy'] text-4xl text-[#d4a843] mt-2">✨ Se reservan los colores pasteles ✨</p>
-        </div>
-        <div class="bg-white/40 p-8 rounded-3xl shadow-lg">
-          <img src="sobres.png" alt="Lluvia de Sobres" class="mx-auto h-24 mb-4" />
-          <p class="text-[#2d1a41] serif-classic">Tu presencia es el mejor regalo, sin embargo si deseas traer un obsequio puedes hacerlo a través de:</p>
-          <p class="font-['Satisfy'] text-4xl text-[#d4a843] mt-2">Lluvia de Sobres</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- RSVP CON BOTONES -->
-    <section class="py-20 px-6 bg-gradient-to-b from-[#f3e7d3] to-[#e6d5bc]">
-      <div class="max-w-2xl mx-auto text-center" data-aos="fade-up">
-        <img src="visto.png" alt="Visto" class="mx-auto w-20 h-20 mb-4" />
-        <p class="text-2xl serif-classic font-medium text-[#4a1a6e]">Para nosotros es muy importante que confirmes tu asistencia</p>
-        <div class="flex flex-col sm:flex-row gap-5 justify-center mt-10">
-          <a href="https://api.whatsapp.com/send?phone=573218547135&text=¡Hola!%20confirmo%20mi%20asistencia%20a%20tus%20quince%20años" target="_blank" class="btn-gold py-4 px-8 rounded-full text-lg font-bold shadow-xl"><i class="fab fa-whatsapp mr-2"></i> Confirmar a Stefania</a>
-          <a href="https://api.whatsapp.com/send?phone=573217314755&text=¡Hola!%20Confirmo%20mi%20asistencia%20a%20los%2015%20años%20de%20Stefania" target="_blank" class="btn-gold py-4 px-8 rounded-full text-lg font-bold shadow-xl"><i class="fab fa-whatsapp mr-2"></i> Confirmar a mamá de Stefania</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- FOOTER ROMÁNTICO -->
-    <footer class="bg-[#1a0829] py-16 text-center">
-      <img src="CORA.png" alt="Cora" class="mx-auto h-44 md:h-64 cora-pulse mb-4" />
-      <p class="text-[#e6cf9e] text-xl md:text-2xl">Stefania Jaramillo Carvajal</p>
-      <div class="flex justify-center gap-3 mt-6 text-[#d4a843] text-xl">
-        <i class="fas fa-feather-alt"></i> <i class="fas fa-crown"></i> <i class="fas fa-star"></i>
-      </div>
-      <p class="salmon-rose-purple-text footer-phrase mt-8">
-        <img src="star.png" alt="" class="rotating-star footer-star" aria-hidden="true" />
-        <span class="align-middle">Una celebración llena de magia y encanto</span>
-        <img src="star.png" alt="" class="rotating-star footer-star" aria-hidden="true" />
-      </p>
-    </footer>
+    <!-- BOTÓN DE MÚSICA FLOTANTE -->
+    <div id="musicButton" class="music-orb">
+      <img src="DISCO.png" alt="Disco" class="music-img" />
+    </div>
+    <audio id="bgAudio" loop preload="auto">
+      <source src="mi_cancion.mp3" type="audio/mpeg">
+    </audio>
   </div>
-
-  <!-- BOTÓN DE MÚSICA FLOTANTE -->
-  <div id="musicButton" class="music-orb">
-    <img src="DISCO.png" alt="Disco" class="music-img" />
-  </div>
-  <audio id="bgAudio" loop preload="auto">
-    <source src="mi_cancion.mp3" type="audio/mpeg">
-  </audio>
 
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
+    // ========== FORZAR ESCALA 75% EN MÓVILES ==========
+    function applyMobileScale() {
+      var wrapper = document.getElementById('scaleWrapper');
+      if (!wrapper) return;
+      // Si el ancho de la pantalla es menor o igual a 768px (móvil)
+      if (window.innerWidth <= 768) {
+        wrapper.style.transform = 'scale(0.75)';
+        wrapper.style.width = '133.33%';  // Compensación para que no haya scroll horizontal
+      } else {
+        wrapper.style.transform = 'none';
+        wrapper.style.width = '100%';
+      }
+    }
+    // Aplicar al cargar y al redimensionar
+    applyMobileScale();
+    window.addEventListener('resize', applyMobileScale);
+    
+    // El resto de tu lógica original
     AOS.init({ duration: 900, once: true, offset: 50 });
 
     const landing = document.getElementById('landing-screen');
@@ -680,6 +716,7 @@
         const content = document.getElementById('invitation-full');
         content.style.display = 'block';
         requestAnimationFrame(() => content.classList.add('visible'));
+        // Activar música automáticamente
         if (!isMusicPlaying) {
           audioEl.play().catch(() => {});
           musicBtn.classList.add('playing');
