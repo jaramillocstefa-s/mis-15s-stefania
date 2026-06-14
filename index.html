@@ -487,6 +487,8 @@
     }
     .serif-classic { font-family: 'Cinzel', 'Cormorant Garamond', serif; letter-spacing: 0.02em; font-weight: 600; }
     .salmon-rose-purple-text { background: linear-gradient(135deg, #ffb3a7, #f2a0c4, #dfb541); -webkit-background-clip: text; background-clip: text; color: transparent; text-shadow: 0 1px 3px rgba(0,0,0,0.18); }
+    
+    /* Botón de música flotante (derecha) */
     .music-orb {
       position: fixed;
       bottom: 30px;
@@ -509,6 +511,30 @@
     .music-orb img { width: 60%; height: auto; display: block; border-radius: 50%; }
     .music-orb.playing { animation: spinMusic 4s linear infinite; }
     @keyframes spinMusic { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+    /* Botón de pantalla completa (izquierda) */
+    .fullscreen-btn {
+      position: fixed;
+      bottom: 30px;
+      left: 30px;
+      width: 56px;
+      height: 56px;
+      background: radial-gradient(circle, #fff5e6, #e9cf9e);
+      border-radius: 50%;
+      border: 2px solid #d4a843;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3), 0 0 0 4px rgba(212,168,67,0.3);
+      cursor: pointer;
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #4a1a6e;
+      font-size: 26px;
+      transition: transform 0.2s;
+    }
+    .fullscreen-btn:hover {
+      transform: scale(1.05);
+    }
 
     img.error-hidden { display: none !important; }
     @keyframes spinSlow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
@@ -796,9 +822,13 @@
       </footer>
     </div>
 
-    <!-- BOTÓN DE MÚSICA FLOTANTE -->
+    <!-- BOTÓN DE MÚSICA FLOTANTE (DERECHA) -->
     <div id="musicButton" class="music-orb">
       <img src="DISCO.png" alt="Disco" class="music-img" />
+    </div>
+    <!-- NUEVO BOTÓN DE PANTALLA COMPLETA (IZQUIERDA) -->
+    <div id="fullscreenButton" class="fullscreen-btn">
+      <i class="fas fa-expand"></i>
     </div>
     <audio id="bgAudio" loop preload="auto">
       <source src="mi_cancion.mp3" type="audio/mpeg">
@@ -812,22 +842,44 @@
       const overlay = document.getElementById('orientationOverlay');
       const body = document.body;
       if (window.matchMedia("(orientation: portrait)").matches) {
-        // Modo vertical: ocultamos el contenido principal y mostramos el overlay
         body.classList.add('portrait');
         body.classList.remove('landscape');
         if (overlay) overlay.classList.remove('hidden');
       } else {
-        // Modo horizontal: mostramos el contenido y ocultamos el overlay
         body.classList.add('landscape');
         body.classList.remove('portrait');
         if (overlay) overlay.classList.add('hidden');
       }
     }
 
-    // Ejecutar al inicio y cada vez que cambie orientación
     handleOrientation();
     window.addEventListener('resize', handleOrientation);
     window.addEventListener('orientationchange', handleOrientation);
+
+    // ========== PANTALLA COMPLETA ==========
+    const fullscreenBtn = document.getElementById('fullscreenButton');
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(err => {
+          console.log(`Error al entrar en pantalla completa: ${err.message}`);
+        });
+        fullscreenBtn.innerHTML = '<i class="fas fa-compress"></i>';
+      } else {
+        document.exitFullscreen();
+        fullscreenBtn.innerHTML = '<i class="fas fa-expand"></i>';
+      }
+    }
+    // Cambiar icono según el estado de fullscreen
+    document.addEventListener('fullscreenchange', () => {
+      if (document.fullscreenElement) {
+        fullscreenBtn.innerHTML = '<i class="fas fa-compress"></i>';
+      } else {
+        fullscreenBtn.innerHTML = '<i class="fas fa-expand"></i>';
+      }
+    });
+    if (fullscreenBtn) {
+      fullscreenBtn.addEventListener('click', toggleFullscreen);
+    }
 
     // ========== EL RESTO DE TU LÓGICA ORIGINAL ==========
     AOS.init({ duration: 900, once: true, offset: 50 });
@@ -849,7 +901,6 @@
             content.style.display = 'block';
             requestAnimationFrame(() => content.classList.add('visible'));
           }
-          // Activar música automáticamente
           if (!isMusicPlaying && audioEl) {
             audioEl.play().catch(() => {});
             if (musicBtn) musicBtn.classList.add('playing');
