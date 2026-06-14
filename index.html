@@ -226,7 +226,7 @@
       width: 100%;
       max-width: 900px;
       margin: 0 auto;
-      height: 650px;
+      height: 650px; /* Altura fija para mantener la proporción en escritorio */
       padding: 5px;
     }
 
@@ -252,7 +252,7 @@
 
     /* Foto Superior Derecha (Alargada, Superpuesta) */
     .collage-derecha-arriba {
-      left: 55%;
+      left: 55%; /* Se monta sobre la foto izquierda */
       top: 2%;
       width: 44%;
       height: 48%;
@@ -262,7 +262,7 @@
 
     /* Foto Inferior Derecha (Alargada, Superpuesta) */
     .collage-derecha-abajo {
-      left: 55%;
+      left: 55%; /* Se monta sobre la foto izquierda */
       bottom: 2%;
       width: 44%;
       height: 48%;
@@ -304,26 +304,24 @@
         padding: 1rem 1.2rem;
         white-space: normal;
       }
-      /* ARREGLO: Mantener collage superpuesto en móvil */
       .collage-superpuesto {
-        height: 500px;
+        height: auto;
+        padding: 0;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 16px;
       }
       .collage-item {
-        position: absolute;
-      }
-      .collage-izquierda {
-        width: 60%;
-        height: 100%;
-      }
-      .collage-derecha-arriba {
-        width: 44%;
-        height: 48%;
-        transform: rotate(1deg);
-      }
-      .collage-derecha-abajo {
-        width: 44%;
-        height: 48%;
-        transform: rotate(-1deg);
+        position: static;
+        width: 100%;
+        height: auto;
+        aspect-ratio: auto !important;
+        transform: none !important;
+        left: auto !important;
+        right: auto !important;
+        top: auto !important;
+        bottom: auto !important;
+        margin: 0;
       }
       .photo-frame > .relative,
       .photo-frame-no-crop > .relative {
@@ -333,12 +331,17 @@
       }
       .photo-frame img,
       .photo-frame-no-crop img,
+      .collage-item img,
       .main-photo-img {
         position: static !important;
         width: 100% !important;
         height: auto !important;
-        object-fit: cover !important;
+        object-fit: contain !important;
         object-position: center center !important;
+      }
+      .main-photo-card,
+      .collage-item {
+        aspect-ratio: auto !important;
       }
       .flex-1.min-w-\[260px\] {
         min-width: 0 !important;
@@ -405,6 +408,7 @@
         margin: 0 18px;
       }
     }
+    /* Footer stars: enlarged to match larger footer text and with a softer yellow tint */
     .footer-star {
       width: 4.4em;
       height: 4.4em;
@@ -418,6 +422,7 @@
         margin: 0 20px;
       }
     }
+    /* Ensure footer phrase and stars stay on one line and scale responsively */
     .footer-phrase {
       display: inline-flex;
       align-items: center;
@@ -559,7 +564,7 @@
               <img src="sol.png" alt="Sol decorativo" class="w-20 h-auto mx-auto rotating-sun" />
             </div>
             <p class="text-[#fef5e7] text-2xl md:text-4xl font-['Playfair_Display'] italic leading-relaxed mb-20 md:mb-28">
-              "Así como Rapunzel dejó su torre para descubrir el mundo, yo dejo atrás mi niñez para iluminar mi camino con la magia de mis 15 años. Con cada paso, cada risa y cada sueño, me acerco más a la mujer que estoy destinada a ser. En esta noche tan especial, quiero compartir mi alegría y mis sueños contigo, porque tú eres parte de mi historia y de mi magia."
+              “Así como Rapunzel dejó su torre para descubrir el mundo, yo dejo atrás mi niñez para iluminar mi camino con la magia de mis 15 años. Con cada paso, cada risa y cada sueño, me acerco más a la mujer que estoy destinada a ser. En esta noche tan especial, quiero compartir mi alegría y mis sueños contigo, porque tú eres parte de mi historia y de mi magia.”
             </p>
             <div class="mt-6 flex justify-center">
               <img src="XV.png" alt="XV" class="mx-auto max-w-sm w-full md:max-w-md" />
@@ -744,6 +749,7 @@
         const content = document.getElementById('invitation-full');
         content.style.display = 'block';
         requestAnimationFrame(() => content.classList.add('visible'));
+        // Activar música automáticamente
         if (!isMusicPlaying) {
           audioEl.play().catch(() => {});
           musicBtn.classList.add('playing');
@@ -782,6 +788,7 @@
           lamp.style.height = size + 'px';
           lamp.style.left = Math.random() * 100 + '%';
           lamp.style.top = Math.random() * 100 + '%';
+          // Make lanterns move faster: durations 2s–5s and shorter random delays
           lamp.style.animationDuration = 2 + Math.random() * 3 + 's';
           lamp.style.animationDelay = Math.random() * 2 + 's';
           lamp.addEventListener('animationend', () => {
