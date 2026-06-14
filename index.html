@@ -220,63 +220,130 @@
       border-radius: inherit;
     }
 
-    /* --- COLLAGE ELEGANTE TIPO "SEGUNDA IMAGEN" --- */
-    .collage-superpuesto {
-      position: relative;
+    /* =========================================================
+       COLLAGE "NOCHE DE LUZ" + FOTO-5 + FOTO-6
+       Bloque base: solo lo común (radios, bordes, sombras).
+       El LAYOUT (posiciones/tamaños) está separado 100% entre
+       escritorio (>=768px) y móvil (<768px) más abajo.
+       ========================================================= */
+    .collage-superpuesto-wrapper {
       width: 100%;
-      max-width: 900px;
-      margin: 0 auto;
-      height: 650px; /* Altura fija para mantener la proporción en escritorio */
-      padding: 5px;
     }
 
     .collage-item {
-      position: absolute;
       border-radius: var(--frame-radius);
       border: var(--frame-border) solid #d4a843;
       overflow: hidden;
       box-shadow: 0 10px 20px rgba(0,0,0,0.4);
       transition: transform 0.3s ease;
     }
-
+    .collage-item img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
     .collage-item:hover { transform: scale(1.02); z-index: 10; }
 
-    /* Foto Izquierda (Grande, Larga) */
-    .collage-izquierda {
-      left: 0;
-      top: 0;
-      width: 60%;
-      height: 100%;
-      z-index: 1;
+    /* ---------------------------------------------------------
+       ESCRITORIO (>= 768px): collage superpuesto tipo "tarjetas"
+       Reescrito para que NINGUNA cara quede recortada: las dos
+       fotos de la derecha ahora tienen más alto y se acomodan
+       en el espacio libre que había debajo de "MIS XV".
+       --------------------------------------------------------- */
+    @media (min-width: 768px) {
+      .collage-superpuesto {
+        position: relative;
+        width: 100%;
+        max-width: 900px;
+        margin: 0 auto;
+        height: 760px;
+        padding: 5px;
+      }
+      .collage-item {
+        position: absolute;
+      }
+      /* Foto Izquierda (grande, vertical) */
+      .collage-izquierda {
+        left: 0;
+        top: 0;
+        width: 58%;
+        height: 100%;
+        z-index: 1;
+      }
+      /* Foto Superior Derecha: más alta, sin recortar la cara */
+      .collage-derecha-arriba {
+        left: 54%;
+        top: 2%;
+        width: 46%;
+        height: 56%;
+        z-index: 3;
+        transform: rotate(1deg);
+      }
+      .collage-derecha-arriba img {
+        object-position: top center;
+      }
+      /* Foto Inferior Derecha: ocupa el espacio libre restante */
+      .collage-derecha-abajo {
+        left: 54%;
+        bottom: 2%;
+        width: 46%;
+        height: 40%;
+        z-index: 2;
+        transform: rotate(-1deg);
+      }
+      .collage-derecha-abajo img {
+        object-position: top center;
+      }
     }
 
-    /* Foto Superior Derecha (Alargada, Superpuesta) */
-    .collage-derecha-arriba {
-      left: 55%; /* Se monta sobre la foto izquierda */
-      top: 2%;
-      width: 44%;
-      height: 48%;
-      z-index: 3;
-      transform: rotate(1deg);
+    /* ---------------------------------------------------------
+       MÓVIL (< 768px): NUEVO layout en columna
+       Fila 1: foto noche-de-luz (ancho completo)
+       Fila 2: foto-5 y foto-6 lado a lado (50/50)
+       Sin position:absolute, sin transform:scale, sin overflow
+       hacks. Cada foto tiene su propia relación de aspecto.
+       --------------------------------------------------------- */
+    @media (max-width: 767px) {
+      .collage-superpuesto {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        width: 100%;
+        height: auto;
+        padding: 0;
+      }
+      .collage-item {
+        position: static;
+        transform: none !important;
+      }
+      /* Foto grande arriba, ancho completo */
+      .collage-izquierda {
+        width: 100%;
+        aspect-ratio: 4 / 3;
+      }
+      /* Fila inferior: foto-5 y foto-6 lado a lado */
+      .collage-fila-rostros {
+        display: flex;
+        gap: 14px;
+        width: 100%;
+      }
+      .collage-derecha-arriba,
+      .collage-derecha-abajo {
+        flex: 1 1 50%;
+        width: 50%;
+        aspect-ratio: 1 / 1;
+      }
+      .collage-derecha-arriba img,
+      .collage-derecha-abajo img {
+        object-position: top center;
+      }
     }
 
-    /* Foto Inferior Derecha (Alargada, Superpuesta) */
-    .collage-derecha-abajo {
-      left: 55%; /* Se monta sobre la foto izquierda */
-      bottom: 2%;
-      width: 44%;
-      height: 48%;
-      z-index: 2;
-      transform: rotate(-1deg);
-    }
-
-    /* --- RESPONSIVE: MÓVIL --- */
+    /* --- RESPONSIVE: MÓVIL (resto de la página) --- */
     @media (max-width: 640px) {
       html {
         font-size: 115%;
-      }
-      body {
-        padding-inline: 0.75rem;
       }
       .landing-body .linea-nombre {
         font-size: clamp(3rem, 10vw, 5rem);
@@ -292,10 +359,6 @@
       .cta-gradient {
         line-height: 1.35;
       }
-      .cta-text {
-        white-space: normal;
-        display: block;
-      }
       .glass-card {
         padding: 1.4rem;
       }
@@ -303,18 +366,6 @@
         font-size: 1rem;
         padding: 1rem 1.2rem;
         white-space: normal;
-      }
-      /* Collage: escalar el layout superpuesto en móvil */
-      .collage-superpuesto-wrapper {
-        overflow: hidden;
-        width: 100%;
-      }
-      .collage-superpuesto {
-        height: 650px;
-        transform-origin: top left;
-        transform: scale(0.433);
-        width: 231%; /* 100/0.433 */
-        margin-bottom: -368px; /* -(650 - 650*0.433) */
       }
       .main-photo-img {
         position: absolute !important;
@@ -361,7 +412,35 @@
       filter: saturate(1.08) contrast(1.04) brightness(1.02);
     }
 
-    .cta-text { white-space: nowrap; display: inline-block; opacity: 1; transition: opacity 0.3s ease; }
+    /* CTA "Toca el sobre para descubrir la magia"
+       - En escritorio: en una sola línea (nowrap), como antes.
+       - En móvil: SIEMPRE en varias líneas (normal + wrap),
+         para que nunca se corte por el borde de la pantalla. */
+    .cta-text {
+      white-space: nowrap;
+      display: inline-flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem 0.6rem;
+      opacity: 1;
+      transition: opacity 0.3s ease;
+      max-width: 100%;
+    }
+    @media (max-width: 767px) {
+      .cta-text {
+        white-space: normal;
+        display: flex;
+        flex-wrap: wrap;
+        text-align: center;
+        padding-inline: 0.5rem;
+      }
+      .cta-text .cta-gradient {
+        white-space: normal;
+        word-break: break-word;
+        flex: 1 1 100%;
+      }
+    }
     .cta-gradient {
       background: linear-gradient(90deg, #ffffff 0%, #ff79c6 100%);
       -webkit-background-clip: text;
@@ -379,6 +458,14 @@
       animation: pulseStar 1.6s ease-in-out infinite;
       margin: 0 14px;
       filter: sepia(1) saturate(4) hue-rotate(10deg) brightness(1.05);
+      flex-shrink: 0;
+    }
+    @media (max-width: 767px) {
+      .cta-text .rotating-star {
+        width: 2.2em;
+        height: 2.2em;
+        margin: 0 6px;
+      }
     }
     @media (min-width: 768px) {
       .rotating-star {
@@ -413,6 +500,12 @@
     }
     @media (min-width: 768px) {
       .footer-phrase { font-size: clamp(1.2rem, 1.6vw, 2.4rem); }
+    }
+    @media (max-width: 767px) {
+      .footer-phrase {
+        white-space: normal;
+        flex-wrap: wrap;
+      }
     }
     .cora-pulse { display: inline-block; animation: coraPulse 1.6s ease-in-out infinite; }
     .pascal-walk { display: inline-block; animation: pascalWalk 2s ease-in-out infinite; }
@@ -492,6 +585,17 @@
     img.error-hidden { display: none !important; }
     @keyframes spinSlow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
     .sun-spin { animation: spinSlow 20s linear infinite; display: inline-block; }
+
+    /* ---------------------------------------------------------
+       LANDING: fix de overflow horizontal y padding excesivo
+       en móvil. En escritorio se mantiene px-16 (sin cambios).
+       --------------------------------------------------------- */
+    @media (max-width: 767px) {
+      #landing-screen {
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+    }
   </style>
 </head>
 <body>
@@ -558,30 +662,37 @@
           </div>
         </div>
         
-        <!-- === NUEVO COLLAGE SUPERPUESTO === -->
+        <!-- === COLLAGE: noche-de-luz + foto-5 + foto-6 ===
+             Desktop: collage superpuesto (CSS >=768px arriba).
+             Móvil: foto grande arriba + foto-5/foto-6 en fila
+                    (CSS <768px arriba). El HTML es el mismo
+                    para ambos; solo cambia el CSS. -->
         <div class="max-w-6xl mx-auto mt-24 px-4">
           <div class="collage-superpuesto-wrapper">
-          <div class="collage-superpuesto">
-            
-            <!-- Foto Izquierda (La más grande) -->
-            <div class="collage-item collage-izquierda photo-frame">
-              <img src="noche-de-luz.jpg" alt="Foto Estilo 2" />
-            </div>
+            <div class="collage-superpuesto">
 
-            <!-- Foto Superior Derecha (Superpuesta) -->
-            <div class="collage-item collage-derecha-arriba photo-frame">
-              <img src="foto-5.jpg" alt="Foto Estilo 1" style="object-position: top center;" />
-            </div>
+              <!-- Foto Izquierda (La más grande / noche de luz) -->
+              <div class="collage-item collage-izquierda photo-frame">
+                <img src="noche-de-luz.jpg" alt="Foto Estilo 2" />
+              </div>
 
-            <!-- Foto Inferior Derecha (Superpuesta) -->
-            <div class="collage-item collage-derecha-abajo photo-frame">
-              <img src="foto-6.jpg" alt="Foto Estilo 3" style="object-position: top center;" />
-            </div>
+              <!-- Wrapper solo para móvil: agrupa foto-5 y foto-6 en fila -->
+              <div class="collage-fila-rostros">
+                <!-- Foto Superior Derecha (Superpuesta en desktop) -->
+                <div class="collage-item collage-derecha-arriba photo-frame">
+                  <img src="foto-5.jpg" alt="Foto Estilo 1" />
+                </div>
 
-          </div>
+                <!-- Foto Inferior Derecha (Superpuesta en desktop) -->
+                <div class="collage-item collage-derecha-abajo photo-frame">
+                  <img src="foto-6.jpg" alt="Foto Estilo 3" />
+                </div>
+              </div>
+
+            </div>
           </div>
         </div>
-        <!-- === FIN NUEVO COLLAGE === -->
+        <!-- === FIN COLLAGE === -->
 
       </div>
     </section>
