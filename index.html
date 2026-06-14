@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, shrink-to-fit=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <title>Stefania Jaramillo Carvajal | 15 años · Edición Encantada</title>
   <!-- Google Fonts premium -->
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700;800;900&family=Satisfy&family=Quicksand:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -11,7 +11,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
-    /* ----- RESET Y ESTILOS GLOBALES PREMIUM ----- */
+    /* ----- RESET Y ESTILOS GLOBALES PREMIUM (tuyos, intactos) ----- */
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
@@ -270,7 +270,7 @@
       transform: rotate(-1deg);
     }
 
-    /* --- RESPONSIVE: MÓVIL --- */
+    /* --- RESPONSIVE: MÓVIL (tus estilos originales, no los modifico) --- */
     @media (max-width: 640px) {
       html {
         font-size: 115%;
@@ -487,8 +487,6 @@
     }
     .serif-classic { font-family: 'Cinzel', 'Cormorant Garamond', serif; letter-spacing: 0.02em; font-weight: 600; }
     .salmon-rose-purple-text { background: linear-gradient(135deg, #ffb3a7, #f2a0c4, #dfb541); -webkit-background-clip: text; background-clip: text; color: transparent; text-shadow: 0 1px 3px rgba(0,0,0,0.18); }
-    
-    /* Botón de música flotante (derecha) */
     .music-orb {
       position: fixed;
       bottom: 30px;
@@ -512,110 +510,33 @@
     .music-orb.playing { animation: spinMusic 4s linear infinite; }
     @keyframes spinMusic { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
-    /* Botón de pantalla completa (izquierda) */
-    .fullscreen-btn {
-      position: fixed;
-      bottom: 30px;
-      left: 30px;
-      width: 56px;
-      height: 56px;
-      background: radial-gradient(circle, #fff5e6, #e9cf9e);
-      border-radius: 50%;
-      border: 2px solid #d4a843;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.3), 0 0 0 4px rgba(212,168,67,0.3);
-      cursor: pointer;
-      z-index: 2000;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #4a1a6e;
-      font-size: 26px;
-      transition: transform 0.2s;
-    }
-    .fullscreen-btn:hover {
-      transform: scale(1.05);
-    }
-
     img.error-hidden { display: none !important; }
     @keyframes spinSlow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
     .sun-spin { animation: spinSlow 20s linear infinite; display: inline-block; }
 
-    /* ========== NUEVO: Estilos para el aviso de orientación ========== */
-    .orientation-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
+    /* ========== NUEVO: FORZAR ESCALA 75% EN MÓVILES ========== */
+    /* Wrapper que contendrá todo el contenido */
+    #app {
+      transition: transform 0.1s ease;
+      transform-origin: top left;
       width: 100%;
-      height: 100%;
-      background: radial-gradient(ellipse at top, #2e1a47, #150a24);
-      z-index: 10000;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      backdrop-filter: blur(12px);
-      transition: opacity 0.5s ease;
-      font-family: 'Playfair Display', serif;
     }
-    .orientation-overlay.hidden {
-      opacity: 0;
-      pointer-events: none;
-      visibility: hidden;
+    /* En móviles (ancho <= 768px) aplicamos la escala del 75% */
+    @media (max-width: 768px) {
+      #app {
+        transform: scale(0.75);
+        width: 133.33%;
+      }
     }
-    .rotate-icon {
-      width: 120px;
-      height: 120px;
-      margin-bottom: 30px;
-      animation: rotatePhone 1.5s ease-in-out infinite;
-    }
-    @keyframes rotatePhone {
-      0% { transform: rotate(0deg); }
-      50% { transform: rotate(90deg); }
-      100% { transform: rotate(90deg); }
-    }
-    .orientation-message {
-      background: rgba(212, 168, 67, 0.2);
-      backdrop-filter: blur(16px);
-      padding: 20px 30px;
-      border-radius: 60px;
-      border: 1px solid #d4a843;
-      font-size: 1.8rem;
-      font-weight: 600;
-      color: #d4a843;
-      text-shadow: 0 2px 10px rgba(0,0,0,0.5);
-      margin: 20px;
-    }
-    .orientation-sub {
-      color: #e6e0ef;
-      font-size: 1.2rem;
-      margin-top: 20px;
-    }
-    /* El contenido principal se muestra solo cuando la orientación es horizontal */
-    #main-content {
-      display: none;
-    }
-    body.landscape #main-content {
-      display: block;
+    /* Pequeño ajuste para que el body no tenga scroll horizontal innecesario */
+    body {
+      overflow-x: hidden;
     }
   </style>
 </head>
 <body>
-  <!-- Overlay de orientación (visible solo si el teléfono está en vertical) -->
-  <div id="orientationOverlay" class="orientation-overlay">
-    <div class="rotate-icon">
-      <i class="fas fa-mobile-alt fa-5x text-[#d4a843]"></i>
-    </div>
-    <div class="orientation-message">
-      🔄 Gira tu teléfono horizontalmente 🔄
-    </div>
-    <div class="orientation-sub">
-      Para vivir la magia completa de mis 15 años
-    </div>
-  </div>
-
-  <!-- TODO EL CONTENIDO DE TU PÁGINA envuelto en un contenedor -->
-  <div id="main-content">
+  <!-- AQUÍ ESTÁ EL WRAPPER: todo tu contenido original va dentro de #app -->
+  <div id="app">
     <!-- PANTALLA DE BIENVENIDA CON SOBRE DE LUJO -->
     <div id="landing-screen" class="min-h-screen flex flex-col items-center justify-center relative bg-morado-profundo px-16 text-center">
       <div class="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-[#d4a84320] to-transparent"></div>
@@ -822,66 +743,18 @@
       </footer>
     </div>
 
-    <!-- BOTÓN DE MÚSICA FLOTANTE (DERECHA) -->
+    <!-- BOTÓN DE MÚSICA FLOTANTE -->
     <div id="musicButton" class="music-orb">
       <img src="DISCO.png" alt="Disco" class="music-img" />
-    </div>
-    <!-- NUEVO BOTÓN DE PANTALLA COMPLETA (IZQUIERDA) -->
-    <div id="fullscreenButton" class="fullscreen-btn">
-      <i class="fas fa-expand"></i>
     </div>
     <audio id="bgAudio" loop preload="auto">
       <source src="mi_cancion.mp3" type="audio/mpeg">
     </audio>
   </div>
+  <!-- FIN DEL WRAPPER #app -->
 
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
-    // ========== CONTROL DE ORIENTACIÓN ==========
-    function handleOrientation() {
-      const overlay = document.getElementById('orientationOverlay');
-      const body = document.body;
-      if (window.matchMedia("(orientation: portrait)").matches) {
-        body.classList.add('portrait');
-        body.classList.remove('landscape');
-        if (overlay) overlay.classList.remove('hidden');
-      } else {
-        body.classList.add('landscape');
-        body.classList.remove('portrait');
-        if (overlay) overlay.classList.add('hidden');
-      }
-    }
-
-    handleOrientation();
-    window.addEventListener('resize', handleOrientation);
-    window.addEventListener('orientationchange', handleOrientation);
-
-    // ========== PANTALLA COMPLETA ==========
-    const fullscreenBtn = document.getElementById('fullscreenButton');
-    function toggleFullscreen() {
-      if (!document.fullscreenElement) {
-        document.documentElement.requestFullscreen().catch(err => {
-          console.log(`Error al entrar en pantalla completa: ${err.message}`);
-        });
-        fullscreenBtn.innerHTML = '<i class="fas fa-compress"></i>';
-      } else {
-        document.exitFullscreen();
-        fullscreenBtn.innerHTML = '<i class="fas fa-expand"></i>';
-      }
-    }
-    // Cambiar icono según el estado de fullscreen
-    document.addEventListener('fullscreenchange', () => {
-      if (document.fullscreenElement) {
-        fullscreenBtn.innerHTML = '<i class="fas fa-compress"></i>';
-      } else {
-        fullscreenBtn.innerHTML = '<i class="fas fa-expand"></i>';
-      }
-    });
-    if (fullscreenBtn) {
-      fullscreenBtn.addEventListener('click', toggleFullscreen);
-    }
-
-    // ========== EL RESTO DE TU LÓGICA ORIGINAL ==========
     AOS.init({ duration: 900, once: true, offset: 50 });
 
     const landing = document.getElementById('landing-screen');
@@ -890,39 +763,34 @@
     const envelopeBtn = document.getElementById('envelopeTrigger');
     let isMusicPlaying = false;
 
-    if (envelopeBtn) {
-      envelopeBtn.addEventListener('click', () => {
-        envelopeBtn.classList.add('abierto');
-        landing.classList.add('sobre-abierto');
-        setTimeout(() => {
-          landing.style.display = 'none';
-          const content = document.getElementById('invitation-full');
-          if (content) {
-            content.style.display = 'block';
-            requestAnimationFrame(() => content.classList.add('visible'));
-          }
-          if (!isMusicPlaying && audioEl) {
-            audioEl.play().catch(() => {});
-            if (musicBtn) musicBtn.classList.add('playing');
-            isMusicPlaying = true;
-          }
-        }, 2000);
-      });
-    }
-
-    if (musicBtn) {
-      musicBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        if (isMusicPlaying) {
-          audioEl.pause();
-          musicBtn.classList.remove('playing');
-        } else {
+    envelopeBtn.addEventListener('click', () => {
+      envelopeBtn.classList.add('abierto');
+      landing.classList.add('sobre-abierto');
+      setTimeout(() => {
+        landing.style.display = 'none';
+        const content = document.getElementById('invitation-full');
+        content.style.display = 'block';
+        requestAnimationFrame(() => content.classList.add('visible'));
+        // Activar música automáticamente
+        if (!isMusicPlaying) {
           audioEl.play().catch(() => {});
           musicBtn.classList.add('playing');
+          isMusicPlaying = true;
         }
-        isMusicPlaying = !isMusicPlaying;
-      });
-    }
+      }, 2000);
+    });
+
+    musicBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (isMusicPlaying) {
+        audioEl.pause();
+        musicBtn.classList.remove('playing');
+      } else {
+        audioEl.play().catch(() => {});
+        musicBtn.classList.add('playing');
+      }
+      isMusicPlaying = !isMusicPlaying;
+    });
 
     document.querySelectorAll('img').forEach(img => {
       img.addEventListener('error', () => {
@@ -967,10 +835,10 @@
       const h = Math.floor((diff % (86400000))/3600000);
       const m = Math.floor((diff % 3600000)/60000);
       const s = Math.floor((diff % 60000)/1000);
-      if (document.getElementById('days')) document.getElementById('days').innerText = d < 10 ? '0'+d : d;
-      if (document.getElementById('hours')) document.getElementById('hours').innerText = h < 10 ? '0'+h : h;
-      if (document.getElementById('minutes')) document.getElementById('minutes').innerText = m < 10 ? '0'+m : m;
-      if (document.getElementById('seconds')) document.getElementById('seconds').innerText = s < 10 ? '0'+s : s;
+      document.getElementById('days').innerText = d < 10 ? '0'+d : d;
+      document.getElementById('hours').innerText = h < 10 ? '0'+h : h;
+      document.getElementById('minutes').innerText = m < 10 ? '0'+m : m;
+      document.getElementById('seconds').innerText = s < 10 ? '0'+s : s;
     }
     setInterval(updateTimer, 1000);
     updateTimer();
