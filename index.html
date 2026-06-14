@@ -271,29 +271,29 @@
         height: 100%;
         z-index: 1;
       }
-      /* Foto Superior Derecha: más alta, sin recortar la cara */
+      /* Foto Superior Derecha: misma altura que la inferior, sin recortar la cara */
       .collage-derecha-arriba {
         left: 54%;
         top: 2%;
         width: 46%;
-        height: 56%;
+        height: 48%;
         z-index: 3;
         transform: rotate(1deg);
       }
       .collage-derecha-arriba img {
-        object-position: top center;
+        object-position: center 30%;
       }
-      /* Foto Inferior Derecha: ocupa el espacio libre restante */
+      /* Foto Inferior Derecha: misma altura, cara centrada */
       .collage-derecha-abajo {
         left: 54%;
         bottom: 2%;
         width: 46%;
-        height: 40%;
+        height: 48%;
         z-index: 2;
         transform: rotate(-1deg);
       }
       .collage-derecha-abajo img {
-        object-position: top center;
+        object-position: center 25%;
       }
     }
 
@@ -389,6 +389,19 @@
       .text-3xl { font-size: 2rem; }
       .text-4xl { font-size: 2.3rem; }
       .text-5xl { font-size: 2.6rem; }
+
+      /* Cuenta regresiva: grilla 2x2 en móvil */
+      #countdown {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+        max-width: 360px;
+        margin: 0 auto;
+      }
+      #countdown .countdown-piece {
+        width: 100%;
+        min-width: 0;
+      }
     }
 
     /* --- FIN COLLAGE --- */
