@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, shrink-to-fit=no">
   <title>Stefania Jaramillo Carvajal | 15 años · Edición Encantada</title>
   <!-- Google Fonts premium -->
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700;800;900&family=Satisfy&family=Quicksand:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Playfair_Display:wght@400;500;600;700;800;900&family=Satisfy&family=Quicksand:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
   <!-- Tailwind solo para utilidades rápidas -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -660,7 +660,7 @@
               <img src="sol.png" alt="Sol decorativo" class="w-20 h-auto mx-auto rotating-sun" />
             </div>
             <p class="text-[#fef5e7] text-2xl md:text-4xl font-['Playfair_Display'] italic leading-relaxed mb-8 md:mb-28">
-              “Así como Rapunzel dejó su torre para descubrir el mundo, yo dejo atrás mi niñez para iluminar mi camino con la magia de mis 15 años. Con cada paso, cada risa y cada sueño, me acerco más a la mujer que estoy destinada a ser. En esta noche tan especial, quiero compartir mi alegría y mis sueños contigo, porque tú eres parte de mi historia y de mi magia.”
+              "Así como Rapunzel dejó su torre para descubrir el mundo, yo dejo atrás mi niñez para iluminar mi camino con la magia de mis 15 años. Con cada paso, cada risa y cada sueño, me acerco más a la mujer que estoy destinada a ser. En esta noche tan especial, quiero compartir mi alegría y mis sueños contigo, porque tú eres parte de mi historia y de mi magia."
             </p>
             <div class="mt-6 flex justify-center">
               <img src="XV.png" alt="XV" class="mx-auto max-w-sm w-full md:max-w-md" />
@@ -826,6 +826,24 @@
         <img src="star.png" alt="" class="rotating-star footer-star" aria-hidden="true" />
       </p>
     </footer>
+
+    <!-- CONTADOR DE VISITANTES (FINAL DE PÁGINA) -->
+    <div style="
+      background: linear-gradient(to right, rgba(30, 15, 45, 0.5), rgba(212, 168, 67, 0.08), rgba(30, 15, 45, 0.5));
+      padding: 12px 0;
+      text-align: center;
+      border-top: 1px solid rgba(212, 168, 67, 0.2);
+      border-bottom: 1px solid rgba(212, 168, 67, 0.2);
+    ">
+      <div style="
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 0.9rem;
+        color: rgba(212, 168, 67, 0.5);
+        letter-spacing: 0.03em;
+      ">
+        <span id="visitor-count">0</span>
+      </div>
+    </div>
   </div>
 
   <!-- BOTÓN DE MÚSICA FLOTANTE -->
@@ -928,6 +946,36 @@
     updateTimer();
 
     generateLanterns();
+
+    // ===== CONTADOR DE VISITANTES CON LOCALSTORAGE =====
+    async function initVisitorCounter() {
+      try {
+        // Obtén la IP pública del usuario
+        const ipResponse = await fetch('https://api.ipify.org?format=json');
+        const ipData = await ipResponse.json();
+        const userIP = ipData.ip;
+
+        // Obtén visitantes guardados en localStorage
+        let visitors = JSON.parse(localStorage.getItem('visitors')) || {};
+        
+        // Si esta IP no está registrada, agrégala
+        if (!visitors[userIP]) {
+          visitors[userIP] = true;
+          localStorage.setItem('visitors', JSON.stringify(visitors));
+        }
+
+        // Muestra el total de visitantes
+        const totalVisitors = Object.keys(visitors).length;
+        document.getElementById('visitor-count').innerText = totalVisitors;
+
+      } catch (error) {
+        // Si falla, muestra un número por defecto
+        console.log('Contador de visitantes desactivado');
+      }
+    }
+
+    // Inicializa el contador cuando carga la página
+    window.addEventListener('load', initVisitorCounter);
   </script>
 </body>
 </html>
